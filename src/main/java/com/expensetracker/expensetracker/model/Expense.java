@@ -13,6 +13,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,8 +27,8 @@ public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)    
     private Integer id;
-    private String expensename;
-    private Double expenseprice;
+    @NotEmpty(message = "'Expense Name' Cannot be empty.") @Size(min=4, max = 40) private String expensename;
+    @NotNull(message = "'Amount' Cannot be empty.") private Double expenseprice;
     private LocalDateTime localDateTime = LocalDateTime.now();
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id", nullable = false)

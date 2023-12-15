@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <title>Your Expense Tracker</title>
+</head>
+<body class="bg-gray-100 p-8">
+
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-md shadow-md">
+    
+        <!-- Table -->
+        <table class="w-full border">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border px-4 py-2">ID</th>
+                    <th class="border px-4 py-2">Expense Name</th>
+                    <th class="border px-4 py-2">Expense Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Replace the following rows with data from your backend -->
+                <tr th:each="expense : ${expenses}">
+                    <td class="border px-4 py-2" th:text="*{expense.id}"></td>
+                    <td class="border px-4 py-2" th:text="*{expense.expensename}"></td>
+                    <td class="border px-4 py-2" th:text="*{expense.expenseprice}"></td>
+                    <td class="border px-4 py-2">
+                        <button class="text-blue-500"><a th:href="@{/edit/{id}(id=${expense.id})}">Edit</a></button>
+                        <button class="text-red-500 ml-2"><a th:href="@{/delete/{id}(id=${expense.id})}">Delete</a></button>
+                    </td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+    </div>
+    
+    </body>
+    </html>

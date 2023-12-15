@@ -7,20 +7,19 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/addexpense.css?version=51}"/>
 </head>
 <body>
-    <h3>Expenses</h3>
+    <h3>Add new expense</h3>
     <div class="form">
         <form th:action="@{/expense}" th:object="${expense}" method="post">
             <label for="ename">Expense Name</label>
-            <input type="text" id="ename" th:field="*{expensename}"/><br/>
+            <input type="text" id="ename" th:field="*{expensename}"/>
+            <p th:if="${#fields.hasErrors('expensename')}" th:errorclass="error" th:errors="*{expensename}">
+            Invalid Name</p><br/>
             <label for="eamount">Expense Amount</label>
-            <input type="text" id="eamount" th:field="*{expenseprice}"/><br/>
+            <input type="text" id="eamount" th:field="*{expenseprice}"/>
+            <p th:if="${#fields.hasErrors('expenseprice')}" th:errorclass="error" th:errors="*{expenseprice}">Invalid Amount</p><br/>
             <label>Expense Categorie</label>
             <select th:field="*{category.category_id}">
                 <option th:each="category: ${categories}" th:value="${category.category_id}" th:text="${category.category_name}"></option>
-                <!-- <option value="food & juice">food & juice</option>
-                <option value="Transportation">Transportation</option>
-                <option value="Travel & Fun">Travel & Fun</option>
-                <option value="Extras">Extras</option> -->
             </select><br>
             <input type="submit" value="save">
         </form>
