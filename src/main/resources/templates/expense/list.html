@@ -27,13 +27,33 @@
                     <td class="border px-4 py-2" th:text="*{expense.expenseprice}"></td>
                     <td class="border px-4 py-2">
                         <button class="text-blue-500"><a th:href="@{/edit/{id}(id=${expense.id})}">Edit</a></button>
-                        <button class="text-red-500 ml-2"><a th:href="@{/delete/{id}(id=${expense.id})}">Delete</a></button>
+                        <button class="text-red-500 ml-2" th:attr="data-expense-id=${expense.id}" onclick="confirmDelete(this.getAttribute('data-expense-id'))">Delete</button>
                     </td>
                 </tr>
                 <!-- Add more rows as needed -->
             </tbody>
         </table>
     </div>
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function confirmDelete(expenseId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to the delete URL
+                    window.location.href = '/delete/' + expenseId;
+                }
+            });
+        }
+        /*]]>*/
+    </script>
     </body>
     </html>

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Expense</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/addexpense.css?version=51}"/>
-</head>
 <body>
     <h3>Add new expense</h3>
     <div class="form">
@@ -24,5 +23,18 @@
             <input type="submit" value="save">
         </form>
     </div>
+
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:inline="javascript" th:if="${message}">
+    /*<![CDATA[*/
+    var message = /*[[${message}]]*/ '';
+    Swal.fire({
+        title: 'Success!',
+        text: message,
+        icon: 'success',
+        confirmButtonText: 'OK'
+    });
+    /*]]>*/
+</script>
 </html>

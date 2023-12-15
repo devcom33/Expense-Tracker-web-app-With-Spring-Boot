@@ -20,8 +20,6 @@ import com.expensetracker.expensetracker.services.ExpenseService;
 import jakarta.validation.Valid;
 
 
-
-
 //@controller because we build a traditional web application that returns HTML pages.
 @Controller 
 public class ExpenseController {
@@ -45,7 +43,9 @@ public class ExpenseController {
             return "expense/add-expense";
         }
         expenseRepository.save(expense);
-        return "redirect:/expense";
+        model.addAttribute("message", "Expense Added Successfully");
+        model.addAttribute("categories", categoryService.getAllEntities());
+        return "expense/add-expense";
     }
     @GetMapping("/list")
     public String list(Model model){
@@ -78,7 +78,6 @@ public class ExpenseController {
     public String deleteExpense(@PathVariable("id") int id, Model model) {
         Expense expense = expenseRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Invalid expense Id: " + id));
-
         expenseRepository.delete(expense);
         return "redirect:/list";
     }
