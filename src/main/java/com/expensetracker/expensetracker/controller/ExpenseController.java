@@ -62,6 +62,7 @@ public class ExpenseController {
         model.addAttribute("categories", categoryService.getAllEntities());
         return "expense/edit";
     }
+    //Update Expense
     @PostMapping("/update/{id}")
     public String updateExpense(@PathVariable("id") int id, @Valid Expense expense,BindingResult result, Model model) {
 
@@ -73,7 +74,7 @@ public class ExpenseController {
         expenseRepository.save(expense);
         return "redirect:/list";
     }
-
+    //delete Expense
     @GetMapping("/delete/{id}")
     public String deleteExpense(@PathVariable("id") int id, Model model) {
         Expense expense = expenseRepository.findById(id)
