@@ -3,9 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Budget Limit</title>
-</head>
+    <title>budget</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/addexpense.css?version=51}"/>
 <body>
-    <h2>SOON</h2>
+    <h3>Budget Limit</h3>
+    <div class="form">
+        <form th:action="@{/budget}" th:object="${budget}" method="post">
+            <label for="budget_limit">budget_limit</label>
+            <input type="text" id="budget_limit" th:field="*{budget_limit}"/>
+            <label>Budget Categorie</label>
+            <select th:field="*{category.category_id}">
+                <option th:each="category: ${categories}" th:value="${category.category_id}" th:text="${category.category_name}"></option>
+            </select><br>
+            <input type="submit" value="save">
+        </form>
+    </div>
+
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:inline="javascript" th:if="${message}">
+    /*<![CDATA[*/
+    var message = /*[[${message}]]*/ '';
+    Swal.fire({
+        title: 'Success!',
+        text: message,
+        icon: 'success',
+        confirmButtonText: 'OK'
+    });
+    /*]]>*/
+</script>
 </html>

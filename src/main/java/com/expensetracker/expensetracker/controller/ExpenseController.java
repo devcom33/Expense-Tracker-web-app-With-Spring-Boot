@@ -1,7 +1,5 @@
 package com.expensetracker.expensetracker.controller;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +31,7 @@ public class ExpenseController {
     public String showForm(Model model) {
         model.addAttribute("expense", new Expense());
         model.addAttribute("categories", categoryService.getAllEntities());
+        System.out.println("***************[*]"+expenseService.getSumCategory());
         return "expense/add-expense";
     }
     @PostMapping("/expense")
@@ -57,7 +56,6 @@ public class ExpenseController {
     public String showUpdateForm(@PathVariable("id") int id,Model model) {
         Expense expense = expenseRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Invalid expense Id: " + id));
-
         model.addAttribute("expense", expense);
         model.addAttribute("categories", categoryService.getAllEntities());
         return "expense/edit";

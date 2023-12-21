@@ -19,4 +19,15 @@ public class ExpenseService {
     public List<Expense> getAllEntities() {
         return expenseRepository.findAll();
     }
+    public double subExpense(double budgetLimit, double expensePrice){
+        return (budgetLimit - expensePrice);
+    }
+    public double getSumCategory(){
+        List<Double> listcat = expenseRepository.ListExpx(1);
+        double sumCategories = 0.0;
+        for (Double i : listcat) {
+            sumCategories += i;
+        }
+        return sumCategories;
+    }
 }
