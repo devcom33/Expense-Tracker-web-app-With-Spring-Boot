@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.expensetracker.expensetracker.model.Expense;
 import com.expensetracker.expensetracker.repository.ExpenseRepository;
+import com.expensetracker.expensetracker.services.BudgetService;
 import com.expensetracker.expensetracker.services.CategoryService;
 import com.expensetracker.expensetracker.services.ExpenseService;
 
@@ -24,6 +25,7 @@ public class ExpenseController {
     @Autowired private ExpenseRepository expenseRepository;
     @Autowired private CategoryService categoryService;
     @Autowired private ExpenseService expenseService;
+    @Autowired private BudgetService budgetService;
     @GetMapping("/expense")
     // public String hello(){
     //     return "expense/add";
@@ -40,6 +42,9 @@ public class ExpenseController {
         {
             model.addAttribute("categories", categoryService.getAllEntities());
             return "expense/add-expense";
+        }
+        if(expenseService.subExpense(budgetService.getBudgetLimit(1), expense.getExpenseprice() ) <= 1000){
+            
         }
         expenseRepository.save(expense);
         model.addAttribute("message", "Expense Added Successfully");

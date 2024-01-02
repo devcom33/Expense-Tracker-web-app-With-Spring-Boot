@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>budget</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/addexpense.css?version=51}"/>
 <body>
     <h3>Budget Limit</h3>
@@ -17,6 +18,29 @@
             </select><br>
             <input type="submit" value="save">
         </form>
+    </div>
+    <div class="Table">
+        <div class="max-w-2xl mx-auto bg-white p-6 rounded-md shadow-md">
+            <!-- Table -->
+            <table class="w-full border">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border px-4 py-2">ID</th>
+                        <th class="border px-4 py-2">Budget Limit</th>
+                        <th class="border px-4 py-2">Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Replace the following rows with data from your backend -->
+                    <tr th:each="b : ${budgets}">
+                        <td class="border px-4 py-2" th:text="*{b.budget_id}"></td>
+                        <td class="border px-4 py-2" th:text="*{b.budget_limit}"></td>
+                        <td class="border px-4 py-2" th:text="*{b.category.category_name}"></td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </body>

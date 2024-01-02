@@ -25,9 +25,11 @@ public class ExpenseService {
     public double getSumCategory(){
         List<Double> listcat = expenseRepository.ListExpx(1);
         double sumCategories = 0.0;
+
         for (Double i : listcat) {
             sumCategories += i;
         }
+
         return sumCategories;
     }
 }
