@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>budget</title>
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/addexpense.css?version=51}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 <body>
     <h3>Budget Limit</h3>
     <div class="form">
@@ -13,9 +13,9 @@
             <label for="budget_limit">budget_limit</label>
             <input type="text" id="budget_limit" th:field="*{budget_limit}"/>
             <label>Budget Categorie</label>
-            <select th:field="*{category.category_id}">
+            <select id="small" th:field="*{category.category_id}" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option th:each="category: ${categories}" th:value="${category.category_id}" th:text="${category.category_name}"></option>
-            </select><br>
+            </select>
             <input type="submit" value="save">
         </form>
     </div>

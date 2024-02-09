@@ -15,4 +15,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer category_id;
     private String category_name;
+
+    @Override
+    public String toString() {
+        return getCategory_name(); // Assuming you have a method like getName() to get the category name
+    }
+
 }

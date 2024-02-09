@@ -28,6 +28,7 @@ public class BudgetController {
     public String processBudget(Budget budget,Model model) {
         budgetRepository.save(budget);
         model.addAttribute("categories", categoryService.getAllEntities());
-        return "budget/add-budget";
+        model.addAttribute("budgets", budgetService.getAllEntities());
+        return "redirect:/budget";
     }
 }

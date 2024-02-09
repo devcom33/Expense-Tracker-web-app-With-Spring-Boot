@@ -15,6 +15,13 @@ public class BudgetService {
     {
         return budgetRepository.findBudgetLimitByCategoryId(categoryId);
     }
+    // public void updateBudgetLimit(Budget budget, Integer categoryId, double newBudgetLimit)
+    // {
+    //     if (budget != null) {
+    //         budget.setBudget_limit(newBudgetLimit);
+    //         budgetRepository.save(budget);
+    //     }
+    // }
     public List<Budget> getAllEntities() {
         return budgetRepository.findAll();
     }

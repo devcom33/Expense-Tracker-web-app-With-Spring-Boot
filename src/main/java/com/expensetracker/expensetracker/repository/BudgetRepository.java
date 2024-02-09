@@ -1,6 +1,7 @@
 package com.expensetracker.expensetracker.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +14,9 @@ import com.expensetracker.expensetracker.model.Budget;
 @Repository
 public interface BudgetRepository extends JpaRepository<Budget, Integer>{
     @Query("SELECT b.budget_limit FROM Budget b where b.category.category_id = ?1")
-    Double findBudgetLimitByCategoryId(Integer category_id);
+    double findBudgetLimitByCategoryId(Integer category_id);
+
+    @Modifying
+    @Query("UPDATE Budget b SET b.budget_limit = ?2 WHERE b.category.category_id = ?1")
+    void updateBudgetLimit(Integer categoryId, Double newBudgetLimit);
 }

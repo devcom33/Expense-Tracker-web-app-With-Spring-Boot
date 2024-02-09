@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,7 @@ public class Budget {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int budget_id;
-    private double budget_limit;
+    @NotNull(message = "'Amount' Cannot be empty.") private double budget_limit;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)

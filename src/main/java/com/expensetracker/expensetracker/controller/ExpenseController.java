@@ -33,7 +33,6 @@ public class ExpenseController {
     public String showForm(Model model) {
         model.addAttribute("expense", new Expense());
         model.addAttribute("categories", categoryService.getAllEntities());
-        System.out.println("***************[*]"+expenseService.getSumCategory());
         return "expense/add-expense";
     }
     @PostMapping("/expense")
@@ -43,12 +42,15 @@ public class ExpenseController {
             model.addAttribute("categories", categoryService.getAllEntities());
             return "expense/add-expense";
         }
-        if(expenseService.subExpense(budgetService.getBudgetLimit(1), expense.getExpenseprice() ) <= 1000){
-            
+        if(( expenseService.getSumCategory() + expense.getExpenseprice() ) > budgetService.getBudgetLimit(expense.getCategory().getCategory_id())){
+            model.addAttribute("message", "Your Budget has been exceeded ");
+            model.addAttribute("categories", categoryService.getAllEntities());  
         }
-        expenseRepository.save(expense);
-        model.addAttribute("message", "Expense Added Successfully");
-        model.addAttribute("categories", categoryService.getAllEntities());
+        else{
+            expenseRepository.save(expense);
+            model.addAttribute("message", "Expense Added Successfully");
+            model.addAttribute("categories", categoryService.getAllEntities());
+        }
         return "expense/add-expense";
     }
     @GetMapping("/list")
@@ -84,9 +86,5 @@ public class ExpenseController {
         .orElseThrow(() -> new IllegalArgumentException("Invalid expense Id: " + id));
         expenseRepository.delete(expense);
         return "redirect:/list";
-    }
-    
-    
-    
-    
+    }   
 }
